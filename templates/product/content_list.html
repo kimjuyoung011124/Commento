@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>product</title>
+</head>
+<body>
+  <h1>Product</h1>
+
+  {% if products %}
+    {% for product in products %}
+      <hr/>
+      <h3><a href="/product/{{ product.id }}/">{{ product.title }}</a></h3>
+      <h5>{{ product.content }}</h5>
+      <p>{{ product.pub_date }}</p>
+    {% endfor %}
+  {% else %}
+    <p>등록된 product가 없습니다.</p>
+  {% endif %}
+</body>
+</html>
