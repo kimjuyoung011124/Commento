@@ -1,21 +1,61 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>product</title>
-</head>
-<body>
-  <h1>Product</h1>
-
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Small Business - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container px-4 px-lg-5">
+            <!-- Heading Row-->
+            <div class="container px-4 px-lg-5 mt-5">
   {% if products %}
     {% for product in products %}
-      <hr/>
-      <h3><a href="/product/{{ product.id }}/">{{ product.title }}</a></h3>
-      <h5>{{ product.content }}</h5>
-      <p>{{ product.pub_date }}</p>
+      <div class="row gx-4 gx-lg-5 align-items-center mb-5">
+        <!-- 왼쪽 이미지 -->
+        <div class="col-lg-7">
+          <img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." />
+        </div>
+
+        <!-- 오른쪽 텍스트 -->
+        <div class="col-lg-5">
+          <h2 class="font-weight-light">{{ product.title }}</h2>
+          <p>{{ product.content }}</p>
+          <a class="btn btn-primary" href="/product/{{ product.id }}/">Call to Action!</a>
+        </div>
+      </div>
     {% endfor %}
   {% else %}
-    <p>등록된 product가 없습니다.</p>
+    <p>등록된 상품이 없습니다.</p>
   {% endif %}
-</body>
+</div>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        </footer>
+    </body>
 </html>
