@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+{# templates/product/content_list.html #}
 {% extends "base.html" %}
-{%load static%}
+{% load static %}
 {% block content %}
+
 <!-- Heading Row-->
 <div class="container px-4 px-lg-5 mt-5">
   {% if products %}
@@ -9,14 +10,20 @@
       <div class="row gx-4 gx-lg-5 align-items-center mb-5">
         <!-- 왼쪽 이미지 -->
         <div class="col-lg-7">
-          <img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." />
+          <img class="img-fluid rounded mb-4 mb-lg-0"
+               src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg"
+               alt="..." />
         </div>
 
         <!-- 오른쪽 텍스트 -->
         <div class="col-lg-5">
           <h2 class="font-weight-light">{{ product.title }}</h2>
-          <p>{{ product.content | truncatewords:30 }}</p>
-          <a class="btn btn-primary" href="{% url 'detail' product.id %}">제품 상세보기</a>
+          <p>{{ product.content|truncatewords:30 }}</p>
+          {# 네임스페이스 'product' 사용 시: product:detail #}
+          <a class="btn btn-primary"
+             href="{% url 'product:detail' product.id %}">
+            제품 상세보기
+          </a>
         </div>
       </div>
     {% endfor %}
@@ -24,4 +31,5 @@
     <p>등록된 상품이 없습니다.</p>
   {% endif %}
 </div>
+
 {% endblock %}

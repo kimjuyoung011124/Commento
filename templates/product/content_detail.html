@@ -1,7 +1,58 @@
+{# templates/product/content_detail.html #}
 {% extends 'base.html' %}
 {% block content %}
+
 <h2>{{ content_list.title }}</h2>
-<div>
- {{ content_list.content }}
-</div>
+<p>{{ content_list.content }}</p>
+
+<section class="mb-5">
+  <div class="card bg-light">
+    <div class="card-body">
+
+      {# 댓글 작성 폼 #}
+      <form method="post"
+            class="mb-4"
+            action="{% url 'product:comment_create' content_list.id %}">
+        {% csrf_token %}
+        <textarea name="content"
+                  class="form-control"
+                  rows="3"
+                  placeholder="내용을 입력해주세요."></textarea>
+        <button type="submit" class="btn btn-primary mt-2">submit</button>
+      </form>
+
+      {# 댓글 리스트 #}
+      {% for comment in content_list.comment_set.all %}
+        <div class="mb-4">
+          <div class="fw-bold">
+            {{ comment.author.username }}&nbsp;&nbsp;
+            <small>{{ comment.create_date }}</small>
+            {% if comment.modify_date %}
+              &nbsp;/&nbsp;
+              <small>수정일자: {{ comment.modify_date }}</small>
+            {% endif %}
+          </div>
+
+          <p>{{ comment.content }}</p>
+
+          {# 작성자 본인일 때만 수정·삭제 버튼 #}
+          {% if user.is_authenticated and user == comment.author %}
+            <a href="{% url 'product:comment_update' comment.id %}"
+               class="btn btn-sm btn-outline-secondary me-1">
+              수정
+            </a>
+            <a href="{% url 'product:comment_delete' comment.id %}"
+               class="btn btn-sm btn-outline-secondary">
+              삭제
+            </a>
+          {% endif %}
+        </div>
+      {% empty %}
+        <p>등록된 댓글이 없습니다.</p>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
 {% endblock %}

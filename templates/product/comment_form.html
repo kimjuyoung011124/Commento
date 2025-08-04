@@ -1,0 +1,25 @@
+{# templates/product/comment_form.html #}
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="mb-5">
+  <div class="card bg-light">
+    <div class="card-body">
+      <form
+        method="post"
+        action="{% if comment.id %}
+                  {% url 'product:comment_update' comment.id %}
+                {% else %}
+                  {% url 'product:comment_create' content_list.id %}
+                {% endif %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">
+          {% if comment.id %}수정 완료{% else %}등록{% endif %}
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

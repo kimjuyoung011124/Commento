@@ -1,9 +1,10 @@
 from django.contrib import admin
-from django.urls import path, include  # include 추가
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
-    path('product/', include('product.urls')),
+    # ↓ 네임스페이스 지정
+    path('product/', include(('product.urls', 'product'), namespace='product')),
     path('accounts/', include('accounts.urls')),
 ]
